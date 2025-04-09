@@ -77,3 +77,39 @@ export async function deleteSong(req, res, next) {
     next(error)
   }
 }
+
+export async function createAlbum(req, res, next) {
+  try {
+    const { title, artist, releaseYear } = req.body
+    const { imageFile } = req.files
+
+    const { imageUrl } = await uploadToCloudinary(imageFile)
+
+    const album = new Album({
+      title,
+      artist,
+      imageUrl,
+      releaseYear,
+    })
+
+    await album.save()
+
+    res.status(201).json(album)
+  } catch (error) {
+    console.log('error in create a album', err)
+    next(error)
+  }
+}
+
+export async function deleteAlbum(req, res, next) {
+  try {
+    const { id } = req.params
+
+    await Song.deleteMany({ albumId: id })
+    await Album.findByIdAndDelete(id)
+    res.status(200).json({message: 'album deleted successfully'})
+  } catch (error) 
+  console.log('error in deleteAlbum' , erro){
+    next(error)
+  }
+}
