@@ -20,4 +20,4 @@ const userSchema = new mongoose.Schema(
 )
 //created at ,updated at
 
-export const User = mongoose.model('User', userUserSchema)
+export const User = mongoose.model('User', userSchema)
