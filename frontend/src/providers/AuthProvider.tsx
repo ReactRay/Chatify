@@ -1,13 +1,13 @@
 import { axiosInstance } from '@/lib/axios'
 import { useAuth } from '@clerk/clerk-react'
-import { useEffect, useState } from 'react'
+import { Children, useEffect, useState } from 'react'
 import {Loader} from 'lucide-react'
 
 
 
 
-export function AuthProvider() {
-  const [getToken, userId] = useAuth()
+export function AuthProvider({children}:{children:React.ReactNode}) {
+  const {getToken}= useAuth()
   
   const [loading,setLoading] = useState(true)
   
@@ -48,5 +48,5 @@ if (loading)
 
   
   
-  return <div>AuthProvider</div>
+  return <div>{children}</div>
 }
