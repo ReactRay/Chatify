@@ -4,21 +4,23 @@ import { useUser } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useRef } from "react";
 
 
 export function AuthCallbackPage() {
   
-  
+  const syncAttempted = useRef(false);
+
   const navigate = useNavigate()
   const {isLoaded,user} = useUser()
   
   useEffect(()=>{
     const syncUser = async ()=> {
+			if (!isLoaded || !user || syncAttempted.current) return;
       
       try {
-        if(!isLoaded || !user) return
-        
+     syncAttempted.current = true;
+
      await axiosInstance.post("/auth/callback", {
 					id: user.id,
 					firstName: user.firstName,
