@@ -113,3 +113,7 @@ export async function deleteAlbum(req, res, next) {
     next(error)
   }
 }
+
+export async function checkAdmin(req, res, next) {
+  res.status(200).json({ admin: true })
+}

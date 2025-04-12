@@ -24,7 +24,7 @@ app.use(clerkMiddleware()) // this will add auth to req object
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: path.joing(__dirname, 'tmp'),
+    tempFileDir: path.join(__dirname, 'tmp'),
     createParentPath: true,
     limits: {
       fileSize: 10 * 1024 * 1024,
@@ -41,14 +41,12 @@ app.use('/api/stats', statsRoutes)
 
 //error handler
 app.use((err, req, resizeBy, next) => {
-  res
-    .status(500)
-    .json({
-      message:
-        process.env.NODE_ENV === 'production'
-          ? 'internal server error'
-          : err.message,
-    })
+  res.status(500).json({
+    message:
+      process.env.NODE_ENV === 'production'
+        ? 'internal server error'
+        : err.message,
+  })
 })
 
 app.listen(PORT, () => {

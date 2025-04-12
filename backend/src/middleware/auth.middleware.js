@@ -13,7 +13,7 @@ export const requireAdmin = async (req, res, next) => {
   try {
     const currentUser = await clerkClient.users.getUser(req.auth.userId)
     const isAdmin =
-      process.env.ADMING_EMAIL === currentUser.primaryEmailAddress.emailAddress
+      process.env.ADMIN_EMAIL === currentUser.primaryEmailAddress.emailAddress
 
     if (!isAdmin) {
       res.status(403).json({ message: 'unauthorized , you are not admin ' })
@@ -21,6 +21,6 @@ export const requireAdmin = async (req, res, next) => {
 
     next()
   } catch (error) {
-    res.status(500).json({ message: 'internal server error', error })
+    next(error)
   }
 }
