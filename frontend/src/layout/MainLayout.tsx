@@ -1,6 +1,7 @@
 
 import { Outlet } from "react-router-dom"
 import { ResizablePanelGroup ,ResizablePanel, ResizableHandle} from "@/components/ui/resizable"
+import { LeftSidebar } from "./components/LeftSidebar";
 
 export function MainLayout() {
     
@@ -13,7 +14,7 @@ export function MainLayout() {
 			<ResizablePanelGroup direction='horizontal' className='flex-1 flex h-full overflow-hidden p-2'>
                   {/* Left side*/}
             <ResizablePanel defaultSize={20} minSize={isMobile ? 0:10} maxSize={30}>
-                lleft side bad
+                <LeftSidebar/>
             </ResizablePanel>
             
             <ResizableHandle className="w-2 bg-black rounded-lg transition-colors"/>
