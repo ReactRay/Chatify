@@ -1,9 +1,45 @@
 import { CardContent,Card } from "@/components/ui/card";
+import { axiosInstance } from "@/lib/axios";
+import { useUser } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 export function AuthCallbackPage() {
+  
+  
+  const navigate = useNavigate()
+  const {isLoaded,user} = useUser()
+  
+  useEffect(()=>{
+    const syncUser = async ()=> {
+      
+      try {
+        if(!isLoaded || !user) return
+        
+     await axiosInstance.post("/auth/callback", {
+					id: user.id,
+					firstName: user.firstName,
+					lastName: user.lastName,
+					imageUrl: user.imageUrl,
+				})
+        
+      } catch (error) {
+        console.log('error in Auth CallBack')
+      }
+      finally{
+        navigate('/')
+      }
+      
+    }
+    
+    syncUser()
+  },[isLoaded,user,navigate])
+  
+  
+  
   return (
     <div className='h-screen w-full bg-black flex items-center justify-center'>
 			<Card className='w-[90%] max-w-md bg-zinc-900 border-zinc-800'>
