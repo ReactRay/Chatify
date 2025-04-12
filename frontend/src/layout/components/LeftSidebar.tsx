@@ -57,7 +57,7 @@ export function LeftSidebar() {
                     <div className="space-y-2">
                         {isLoading ? (
                             <PlaylistSkeleton />
-                        ) : ()}
+                        ) : (<div> </div>)}
 
                     </div>
 
