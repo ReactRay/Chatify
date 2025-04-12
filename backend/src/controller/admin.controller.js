@@ -107,9 +107,9 @@ export async function deleteAlbum(req, res, next) {
 
     await Song.deleteMany({ albumId: id })
     await Album.findByIdAndDelete(id)
-    res.status(200).json({message: 'album deleted successfully'})
-  } catch (error) 
-  console.log('error in deleteAlbum' , erro){
+    res.status(200).json({ message: 'album deleted successfully' })
+  } catch (error) {
+    console.log('error in deleteAlbum', erro)
     next(error)
   }
 }
