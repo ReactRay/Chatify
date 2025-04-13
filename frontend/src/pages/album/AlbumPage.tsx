@@ -34,7 +34,7 @@ export function AlbumPage() {
     if (isLoading) return null
 
     return <div className="h-full">
-        <ScrollArea className="h-full">
+        <ScrollArea className="h-full rounded-md">
             <div className="relative min-h-full ">
                 <div
                     className='absolute inset-0 bg-gradient-to-b from-[#5038a0]/80 via-zinc-900/80

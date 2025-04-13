@@ -1,9 +1,9 @@
 
 import { useChatStore } from "@/stores/useChatStore";
 import { useUser } from "@clerk/clerk-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { HeadphonesIcon, Users } from "lucide-react";
+import { HeadphonesIcon, Music, Users } from "lucide-react";
 import { useEffect } from "react";
 
 
@@ -20,10 +20,11 @@ export function FriendsActivity() {
     }, [fetchUsers, user])
 
 
+    const isPlaying = true
 
 
 
-    return <div className="h-full bg-zinc-900 rounded-lg flex flex-col">
+    return <div className='h-full bg-zinc-900 rounded-lg flex flex-col'>
         <div className='p-4 flex justify-between items-center border-b border-zinc-800'>
             <div className='flex items-center gap-2'>
                 <Users className='size-5 shrink-0' />
@@ -33,40 +34,53 @@ export function FriendsActivity() {
 
         {!user && <LoginPrompt />}
 
-        <ScrollArea>
-            <div className="p-4 space-y-4">
-                {
-                    users.map((user) => {
-                        return (
-                            <div key={user._id} className="cursor-pointer hover:bg-zinc-800/50 p-3 rounded-md transition-colors group">
-                                <div className="flex items-start gap-3">
-                                    <div className="relative">
-                                        <Avatar className='size-10 border border-zinc-800'>
-                                            <AvatarImage src={user.imageUrl} alt={user.fullName} />
-                                            <AvatarFallback>{user.fullName[0]}</AvatarFallback>
+        <ScrollArea className='flex-1'>
+            <div className='p-4 space-y-4'>
+                {users.map((user) => {
 
-
-                                        </Avatar>
-                                        <div
-                                            className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-zinc-900`}
-
-                                            aria-hidden='true'
-                                        />
-
-                                    </div>
-
+                    return (
+                        <div
+                            key={user._id}
+                            className='cursor-pointer hover:bg-zinc-800/50 p-3 rounded-md transition-colors group'
+                        >
+                            <div className='flex items-start gap-3'>
+                                <div className='relative'>
+                                    <Avatar className='size-10 border border-zinc-800'>
+                                        <AvatarImage src={user.imageUrl} alt={user.fullName} />
+                                        <AvatarFallback>{user.fullName[0]}</AvatarFallback>
+                                    </Avatar>
+                                    <div
+                                        className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-zinc-900 `}
+                                        aria-hidden='true'
+                                    />
                                 </div>
 
+                                <div className='flex-1 min-w-0'>
+                                    <div className='flex items-center gap-2'>
+                                        <span className='font-medium text-sm text-white'>{user.fullName}</span>
+                                        {isPlaying && <Music className='size-3.5 text-emerald-400 shrink-0' />}
+                                    </div>
+
+                                    {isPlaying ? (
+                                        <div className='mt-1'>
+                                            <div className='mt-1 text-sm text-white font-medium truncate'>
+                                                by me
+                                            </div>
+                                            <div className='text-xs text-zinc-400 truncate'>
+
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className='mt-1 text-xs text-zinc-400'>Idle</div>
+                                    )}
+                                </div>
                             </div>
-                        );
-                    })
-                }
-
+                        </div>
+                    );
+                })}
             </div>
-
         </ScrollArea>
-
-    </div>;
+    </div>
 }
 
 const LoginPrompt = () => (
