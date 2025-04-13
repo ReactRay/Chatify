@@ -23,7 +23,6 @@ export function LeftSidebar() {
 
 
 
-    console.log(albums)
 
 
     return (

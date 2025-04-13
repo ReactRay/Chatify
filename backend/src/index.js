@@ -46,7 +46,7 @@ app.use('/api/albums', albumRoutes)
 app.use('/api/stats', statsRoutes)
 
 //error handler
-app.use((err, req, resizeBy, next) => {
+app.use((err, req, res, next) => {
   res.status(500).json({
     message:
       process.env.NODE_ENV === 'production'
