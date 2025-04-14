@@ -2,6 +2,7 @@
 
 import { axiosInstance } from '@/lib/axios'
 import { Album, Song, Stats } from '@/types';
+import toast from 'react-hot-toast';
 import { create } from 'zustand'
 
 
@@ -25,6 +26,7 @@ interface MusicStore {
 
 	fetchStats: () => Promise<void>,
 	fetchSongs: () => Promise<void>,
+	deleteSong: (id: string) => Promise<void>,
 }
 
 
@@ -139,6 +141,33 @@ export const useMusicStore = create<MusicStore>((set) => ({
 		}
 
 	},
+
+	deleteSong: async (id) => {
+
+		set({ isLoading: true, error: null })
+
+		try {
+
+			await axiosInstance.delete('/admin/songs/delete')
+
+			set(state => ({
+				songs: state.songs.filter(song => song._id !== id)
+			}))
+
+			toast.success('song deleted successfully');
+
+
+		} catch (error: any) {
+			console.log('error in music store', error.message)
+			toast.error('error deleting a song')
+
+		} finally {
+			set({ isLoading: false })
+		}
+
+	}
+
+
 
 
 }),)
