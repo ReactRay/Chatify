@@ -2,8 +2,7 @@ import { usePlayerStore } from "@/stores/usePlayerStore";
 import { useEffect, useRef, useState } from "react";
 import { Laptop2, ListMusic, Mic2, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume1 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@radix-ui/react-slider";
-
+import { Slider } from "@/components/ui/slider";
 
 const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
