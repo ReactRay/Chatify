@@ -1,6 +1,5 @@
 import { User } from "../models/user.model.js";
-import { Message } from "../models/message.model.js";
-
+import {Message} from '../models/messages.model.js'
 export const getAllUsers = async (req, res, next) => {
 	try {
 		const currentUserId = req.auth.userId;
