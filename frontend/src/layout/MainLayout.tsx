@@ -4,6 +4,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { LeftSidebar } from "./components/LeftSidebar";
 import { FriendsActivity } from "./components/FriendsActivity";
 import AudioPlayer from "./components/AudioPlayer";
+import { PlaybackControls } from "./components/PlaybackControls";
 
 export function MainLayout() {
 
@@ -34,7 +35,7 @@ export function MainLayout() {
 
       </ResizablePanelGroup>
 
-
+      <PlaybackControls />
 
     </div>
   )
